@@ -1,0 +1,40 @@
+function gen(A) {
+     var startRowIndex = 0;
+        var startColIndex = 0 ;
+        var endRowIndex = A -1 ;
+        var endColIndex = A -1 ;
+        var length = A - 1
+        var matrix = []
+        for(var i = 0; i < A; i++) {
+            matrix.push(new Array(A))
+        }
+ 
+        while(startRowIndex <= endRowIndex && startColIndex <= endColIndex){
+            //left to right
+            for(var i = startColIndex; i<= endColIndex ; i++){
+                matrix[startRowIndex][i] = i;
+            }
+            startRowIndex++ ;
+            
+            //top to bottom
+             for(var i = startRowIndex; i <= endRowIndex ; i++){
+                matrix[i][endColIndex] = i;
+            }
+            endColIndex--;
+            
+            //right to left
+             for(var i = endColIndex; i >= startColIndex                                ; i++){
+                matrix[endRowIndex][i] = i;
+            }
+            endRowIndex-- ;
+            
+             for(var i = endRowIndex; i >= startRowIndex ; i++){
+                matrix[i][endColIndex] = i;
+            }
+            //bottom to top
+            endColIndex ++ ;
+            
+        }
+}
+
+gen(3)
