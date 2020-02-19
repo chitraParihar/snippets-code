@@ -1,0 +1,55 @@
+function findMissingNO(A) {
+  findMissingNOUsingHash(A);
+  findMissingNOUsingAbs(A)
+}
+
+function findMissingNOUsingHash(A){
+ let arrObject = getPositiveNo(A);
+ let hasmap ={};
+ for(let i=0; i< arrObject.j;i++){
+ 	hasmap[A[i]] = A[i]
+ }
+
+ for(let i=1;i<=Object.keys(hasmap).length; i++){
+	if(hasmap[i] != i) {
+		console.log("USING HASH", i);
+		return i;
+	}
+ }	
+}
+
+
+function findMissingNOUsingAbs(A) {
+  getPositiveNo(A);
+  let len = A.length;
+  for(let i=0; i< len;i++) {
+	if(A[i] > 0 && A[i] < len) {
+		A[A[i]]= -1 * Math.abs(A[A[i]])
+	}
+  }
+  for(let i=1; i<len;i++) {
+  	if(A[i] > 0) {
+  		console.log("MISSING USING ABs", i);
+		return ;
+  	}
+  }
+}
+
+
+function getPositiveNo(arr){
+let j = 0, i; 
+    for (i = 0; i < arr.length; i++) { 
+        if (arr[i] > 0) { 
+            let temp = arr[i];
+			arr[i]=arr[j];
+			arr[j]=temp
+            j++; // increment count of non-positive integers
+        } 
+    } 
+  
+    return {'arr':arr, 'j': j};
+}
+
+//findMissingNO([417, 929, 845, 462, 675, 175, 73, 867, 14, 201, 777, 407, 80, 882, 785, 563, 209, 261, 776, 362, 730, 74, 649, 465, 353, 801, 503, 154, 998, 286, 520, 692, 68, 805, 835, 210, 819, 341, 564, 215, 984, 643, 381, 793, 726, 213, 866, 706, 97, 538, 308, 797, 883, 59, 328, 743, 694, 607, 729, 821, 32, 672, 130, 13, 76, 724, 384, 444, 884, 192, 917, 75, 551, 96, 418, 840, 235, 433, 290, 954, 549, 950, 21, 711, 781, 132, 296, 44, 439, 164, 401, 505, 923, 136, 317, 548, 787, 224, 23, 185, 6, 350, 822, 457, 489, 133, 31])
+
+findMissingNO([3,12,41,2])
