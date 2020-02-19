@@ -1,0 +1,21 @@
+function swapMatrix(gmatrix) {
+    let matrix =  gmatrix.splice(0);
+	var col = matrix[0].length;
+	var row = matrix.length;
+
+	for(let i =0; i< row; i++){
+	  swapColums(matrix, i, col)
+    }
+    console.log("NEW Matrix", matrix)
+    return matrix;
+}
+
+function swapColums(matrix, row, nextCol) {
+    var temp = matrix[row][0];
+    matrix[row][0] = matrix[row][nextCol-1];
+    matrix[row][nextCol-1] = temp;
+}
+
+var gmatrix = [[1,2,3,4],[5,6,7,8], [9,10,11,12], [13,14,15,16]];
+console.log("OLD Matrix", gmatrix)
+swapMatrix(gmatrix)
