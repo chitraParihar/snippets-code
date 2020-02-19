@@ -1,0 +1,43 @@
+function Queue () {
+  this.pushS = []
+  this.popS = []}
+
+Queue.prototype.enqueue = function (val) {
+  this.pushS.push(val);
+};
+
+Queue.prototype.dequeue = function () {
+
+        let len = this.pushS.length;
+  		
+        // pop an item from the stack
+        var x = this.pushS[len-1]; 
+        this.pushS.pop(); 
+  
+        // if stack becomes empty, return
+        // the popped item
+        if (this.pushS.length == 0) 
+            return ; 
+  
+        // recursive call
+        var item = this.dequeue(); 
+  
+        // push popped item back to the stack
+        this.pushS.push(x); 
+  
+        // return the result of deQueue() call
+        return item; 
+    
+};
+
+
+var q1 = new Queue();
+q1.enqueue(3);
+q1.enqueue(4);
+q1.enqueue(5);
+q1.enqueue(6);
+q1.enqueue(7);
+
+console.log('Current stat of the Queue is stored saved in the popS.', q1);
+q1.dequeue();
+q1.dequeue();
