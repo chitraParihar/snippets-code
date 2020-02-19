@@ -1,0 +1,58 @@
+function romanTOInteger(num){
+let val;
+switch(num){
+  
+case 'IV': val=4;
+		break;
+case 'V': val=5;
+		break;
+case 'IX': val=9;
+		break;
+case 'XL': val=40;
+		break;
+
+case 'XC': val=90;
+		break;
+
+case 'CD': val=400;
+		break;
+
+case 'CM': val=900;
+		break;
+case 'X': val=10;
+		break;
+case 'L': val=50;
+		break;
+case 'C': val=100;
+		break;
+case 'D': val=500;
+		break;
+case 'M': val=1000;
+		break;
+  case 'I': val=1;
+		break;
+}
+return val;
+}
+
+
+function convert(num){
+let res = 0
+for(let i=0; i< num.length;){
+	let s1=romanTOInteger(num[i]);
+	let s2 =romanTOInteger(num[i+1]);
+	
+	if(s1 > s2){
+	res=res + s1+s2;
+	} else {
+	res=res + s2-s1;
+	}
+ i = i+2;
+}
+console.log(num +"====>"+ res);
+return res;
+}
+
+convert('IX');
+convert('XL');
+convert('MCMV')
