@@ -1,0 +1,12 @@
+function gcdFunc(a, b) {
+     console.log(a, b)
+    
+ if(b==0){
+    return a;
+ }   
+ return gcdFunc(b, a % b);
+}
+
+
+var val = gcdFunc(12, 3);
+console.log("GCD ", val)
