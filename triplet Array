@@ -1,0 +1,27 @@
+function tripletRange(arr,minRange, maxRange ) {
+	var tripletArray = [];
+	var first, sec;
+	var sortedArray = arr.sort(function(a,b) {return a - b});
+	for(var i=0;i<sortedArray.length;i++) {
+		sec= i+1;
+		last = sortedArray.length - 1;
+		while(sec < last) {
+			sum = sortedArray[i] + sortedArray[sec] + sortedArray[last];
+			if(sum <= minRange) {
+				sec++;
+			} else if(sum >= maxRange){
+				last--;
+			}
+			if(sum > minRange && sum < maxRange) {
+			 tripletArray.push([arr[i], arr[sec], arr[last]]);
+			 last--;
+		 }
+	   }
+	 }
+	console.log("TRIPLET ARRAY", tripletArray)
+	console.log("COunt of triplets", tripletArray.length)
+}
+
+
+
+tripletRange([2, 7, 5, 3, 8, 4, 1, 9], 8,16)
