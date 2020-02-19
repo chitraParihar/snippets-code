@@ -1,0 +1,35 @@
+function compareAndFind(arr, min){
+   var i=0;
+   for(i = 0; i<min;i++){
+	for(let j=0;j<arr.length-1;){
+		if(arr[j][i] == arr[j+1][i]){
+			j++;
+		}
+	else {
+		return i-1;
+	  }
+	}
+  }
+ return i-1;
+}
+
+function findMinglength(arr){
+    let min = arr[0].length;
+    for(let i=1; i<arr.length; i++) {
+        if(min > arr[i].length) {
+            min = arr[i].length;
+        }
+    }
+    return min;
+}
+
+function getLongestPalindrome(stringArray) {
+   let minCommonLength = findMinglength(stringArray);
+ 
+   let commonIndex = compareAndFind(stringArray, minCommonLength);
+   console.log("Longest Common Length String ==== ", stringArray[0].substring(0, commonIndex+1))
+}
+
+
+var arr = ['geeks', 'geeksfor','geekss'];
+getLongestPalindrome(arr)
