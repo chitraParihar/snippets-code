@@ -1,0 +1,18 @@
+function rotationCount(array) {
+  let breakPoint=array[0];
+  let breakPointIndex = 0;
+  for(let i=1; i<array.length; i++) {
+    if(breakPoint>array[i]) {
+        breakPointIndex = i;
+        break;
+    } else {
+       breakPoint = array[i];
+    }
+  }
+  console.log(`${array} No of rotationCount is: ${breakPointIndex}`);
+}
+
+rotationCount([15, 18, 2, 3, 6, 12]);
+rotationCount([7, 9, 11, 12, 5]);
+
+rotationCount([7, 9, 11, 12, 15]);
