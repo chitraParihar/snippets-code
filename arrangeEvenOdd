@@ -1,0 +1,30 @@
+function arrangeEvenOdd(arr) {
+
+let sortArray = arr.sort();
+
+let mid = Math.floor(arr.length/2);
+//odd pos
+
+let j = 0;
+let len = arr.length;
+let newarr = [];
+
+ mid = len%2 == 0 ? mid-1:mid;
+
+for(let i=mid+1; i<len; i++) {
+    newarr[j]=arr[i]
+    j+=2;
+}
+//even
+j=1;
+
+
+for(let i=0; i<=mid; i++) {
+    newarr[j]=arr[i]
+    j+=2;
+}
+console.log("new array", newarr)
+}
+
+arrangeEvenOdd([1,4,2,42,1,43,4324])
+arrangeEvenOdd([31,9,14,2,42,1,43,4324])
