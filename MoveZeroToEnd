@@ -1,0 +1,42 @@
+
+
+function moveZeroToEnd(array) {
+let fp = array.length - 1;
+let start = 0;
+let ap = JSON.parse(JSON.stringify(array))
+  for(let i=array.length - 1; i > 0; i--) {
+    if(array[i] > 1) {
+      fp = i;
+      break;
+    }    
+  }
+  while(start < array.length -1 && start < fp ) {
+    if(array[start] == 0 ) {
+      swap(start,fp, array);
+      fp--;
+    }
+     start++;
+  }
+  console.log("moveZeroToEnd"+ap, array)
+  return array;
+}
+
+
+function swap(to, from, array) {
+    let temp = array[to];
+    array[to] = array[from];
+    array[from] = temp;
+}
+
+function arrange(array) {
+  let start = 0, end = array.length - 1;
+  while(start < end && array[start] < 0 && start < array.length - 1  ) {
+    swap(array[start],array[end]);
+    start = start + 2;
+    end = end + 1;
+  }
+}
+moveZeroToEnd([1, 2, 0, 4, 3, 0, 5, 0])
+
+
+
