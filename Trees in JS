@@ -1,0 +1,47 @@
+function trees(root) {
+  this.root = 1;
+  this.treeArray = []; 
+  this.setRoot(root);
+}
+
+trees.prototype.setRoot=function(node) {
+    this.treeArray[1] = node;
+}
+
+trees.prototype.setLeft=function(node, root) {
+    if(this.treeArray[root] == null) {
+        console.log("ROOT NOT FOUND for", root)
+        return;
+    } else {
+        this.treeArray[2 * root] = node;
+    }
+}
+
+trees.prototype.setRight=function(node, root) {
+    if(this.treeArray[root] == null) {
+        console.log("ROOT NOT FOUND for", root)
+        return;
+    } else {
+        this.treeArray[(2 * root)+1] = node;
+    }
+}
+
+trees.prototype.printTree = function(){
+    for(let i=1; i<this.treeArray.length; i++) {
+        if(!!this.treeArray[i]) {
+           console.log(this.treeArray[i]);
+        } else {
+           console.log("-");
+        }
+       
+    }
+}
+
+
+
+var _tree = new trees("A");
+_tree.setRight("C",1);
+_tree.setLeft("D",2);
+_tree.setLeft("E",2)
+_tree.setLeft("F",3);
+_tree.printTree();
