@@ -1,0 +1,17 @@
+function partitionElements(array) {
+ let fp = 0;
+let ap = JSON.parse(JSON.stringify(array))
+ for(let i = 0; i<array.length; i++) {
+    if(array[i] < 0) {
+      swap(fp,i, array);
+      fp++;
+    }
+  }
+  console.log("reraangeArray"+ap, array)
+  return array;
+}
+
+partitionElements([1,2,-3, 4,-5,6,-7,8,9])
+
+
+**********************************************************
