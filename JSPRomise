@@ -1,0 +1,93 @@
+function MyPromise(action) {
+	this.status = 'pending';
+	this.value = undefined;
+	this.thenCallbacks = [];
+	this.onThen = {};
+    this.onCatch = {};
+    this.onFinally = {};
+
+    this.then = function(callback) {
+        this.onThen = callback;
+       // this.thenCallbacks.push(callback);
+        return this;
+    }
+    
+     this.catch = function(callback) {
+        this.onCatch = callback;
+        return this;
+    }
+
+     this.finally = function(callback) {
+        this.onFinally = callback;
+        return this;
+    }
+
+   function resolver(value) {
+        this.status = 'resolved';
+        this.value = value;
+//         this.thenCallbacks.forEach(function(val){
+//             val(this.value)
+//         }, this);
+        
+        this.thenCallbacks(this.value)
+
+        if(typeof this.finallyCallback == 'function'){
+            this.finallyCallback(this.value);
+        }
+   }
+
+    
+
+   function rejector(value) {
+        this.status = 'rejected';
+        this.value = value;
+       
+        if(typeof this.catchCallback == 'function'){
+            this.catchCallback(this.value);
+        }
+
+          if(typeof this.finallyCallback == 'function'){
+            this.finallyCallback(this.value);
+        }
+
+   }
+
+    action(resolver.bind(this), rejector.bind(this));
+}
+
+
+
+function get(url) {
+    debugger
+    return new MyPromise(function(resolve, reject){
+        var request = new XMLHttpRequest();
+        request.open('GET', url);
+
+        request.onload = function() {
+            if(request.status = 200) {
+                resolve(request.response)
+            } else {
+                reject(Error(request.statusText))
+            }
+        };
+
+        request.onerror = function() {
+            reject(Error('nerror'))
+        }        
+
+        request.send();
+
+    })
+}
+
+
+get('https://nerboda.github.io')
+.then(function(response){
+    console.log(response)
+})
+.catch(function(error){
+    console.log(error)
+})
+.then(function(result){
+    console.log(result)
+})
