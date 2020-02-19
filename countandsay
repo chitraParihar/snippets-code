@@ -1,0 +1,32 @@
+function getCountAndNumber(element) {
+var prevEle = element[0];
+var count = 0;
+var newEle = '';
+for(var i=0; i<element.length; i++) {
+var currentEle = element[i];
+
+if(currentEle != prevEle) {
+     newEle += ''+ count + prevEle;
+     count = 0;
+}
+  count ++;
+  if(i == element.length - 1) {
+        newEle += ''+ count + currentEle;
+   } 
+  prevEle = currentEle;
+}
+
+return newEle;
+}
+
+
+function sayAndCount(num){
+
+    if(num.length > 10) {
+     return;
+    }   
+    var nextElement = getCountAndNumber(num);
+    console.log(sayAndCount(nextElement));
+}
+
+//sayAndCount("1")
