@@ -2,13 +2,14 @@ function MyPromise(action) {
 	this.status = 'pending';
 	this.value = undefined;
 	this.thenCallbacks = [];
-	this.onThen = {};
+	this.catchCallback = {};
+	this.finallyCallback = {};
     this.onCatch = {};
     this.onFinally = {};
 
     this.then = function(callback) {
-        this.onThen = callback;
-       // this.thenCallbacks.push(callback);
+        //this.onThen = callback;
+       this.thenCallbacks.push(callback);
         return this;
     }
     
@@ -25,14 +26,12 @@ function MyPromise(action) {
    function resolver(value) {
         this.status = 'resolved';
         this.value = value;
-//         this.thenCallbacks.forEach(function(val){
-//             val(this.value)
-//         }, this);
-        
-        this.thenCallbacks(this.value)
-
-        if(typeof this.finallyCallback == 'function'){
-            this.finallyCallback(this.value);
+        this.thenCallbacks.forEach(function(val){
+            val(this.value)
+        }, this);
+		
+         if(typeof this.onFinally == 'function'){
+            this.onFinally(this.value);
         }
    }
 
@@ -42,12 +41,12 @@ function MyPromise(action) {
         this.status = 'rejected';
         this.value = value;
        
-        if(typeof this.catchCallback == 'function'){
-            this.catchCallback(this.value);
+        if(typeof this.onCatch == 'function'){
+            this.onCatch(this.value);
         }
 
-          if(typeof this.finallyCallback == 'function'){
-            this.finallyCallback(this.value);
+          if(typeof this.onFinally == 'function'){
+            this.onFinally(this.value);
         }
 
    }
@@ -58,16 +57,15 @@ function MyPromise(action) {
 
 
 function get(url) {
-    debugger
     return new MyPromise(function(resolve, reject){
         var request = new XMLHttpRequest();
         request.open('GET', url);
 
         request.onload = function() {
             if(request.status = 200) {
-                resolve(request.response)
+              resolve(request.response)
             } else {
-                reject(Error(request.statusText))
+               reject(Error(request.statusText))
             }
         };
 
@@ -83,11 +81,13 @@ function get(url) {
 
 get('https://nerboda.github.io')
 .then(function(response){
+console.log("<<<<<<<<<<<<<<<<<<<<<<<<<response")
     console.log(response)
 })
 .catch(function(error){
+	console.log("<<<<<<<<<<<<<<<<<<<<<<<<<ERROR")
     console.log(error)
-})
-.then(function(result){
+}).finally(function(result) {
+		console.log("<<<<<<<<<<<<<<<<<<<<<<FINALLY")
     console.log(result)
 })
