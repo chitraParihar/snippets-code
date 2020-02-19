@@ -1,0 +1,22 @@
+function customTimeout(callback, delay) {
+    console.log("start")
+    let date = new Date();
+    let current = date.getTime();
+    let _delay = current + delay;   
+    while(current<=_delay) {
+        console.log("start", current)
+        if(current == _delay) {
+            console.log(current)
+            console.log("stop")
+            callback();
+            break;
+        }
+        current++;
+    }
+};
+
+function showname() {
+    console.log("heloo")
+}
+
+customTimeout(showname, 10);
