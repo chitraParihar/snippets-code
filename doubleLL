@@ -1,0 +1,30 @@
+function Node(data){
+    this.data = data;
+    this.next = null;
+    this.prev = null;
+}
+
+function doubleLinkedList(){
+    this.head = null;
+    this.tail = null;
+}
+doubleLinkedList.prototype.add = function(data) {
+   let node = new Node(data);
+   let prev;
+   if(this.head == null) {
+      this.head = node;
+      this.tail = node;  
+   } else {
+     
+      this.tail.next = node;
+       node.prev = this.tail;
+      this.tail = node;
+    }
+    
+}
+
+var dList = new doubleLinkedList();
+dList.add(10);
+dList.add(111);
+dList.add(222);
+console.log("DOUBLE LINKED LIST", dList)
