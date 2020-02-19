@@ -1,0 +1,25 @@
+function memoize(func) {
+var cache = {};
+return function() {
+ var key = JSON.stringify(arguments);
+ if(cache[key]){
+  console.log("caCHE", key, cache[key])
+  return cache[key];
+ } else {
+  cache[key]=func.apply(null, arguments);
+  console.log("FUNC", key, cache[key])
+  return cache[key];
+  }
+ }
+}
+
+function adding(a, b){
+return a+ b +10;
+}
+let _add = memoize(adding);
+console.log("HEllo "+ _add(4,2));
+_add(4,3);
+_add(4,2);
+_add(40, 3);
+_add(4,3);
+_add(40,4);
