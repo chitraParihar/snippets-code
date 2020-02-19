@@ -1,0 +1,15 @@
+function stringoholics(val) {
+    let fp=0, lp = val.length-1;
+    while(val[lp] == val[fp]) {
+        lp--;
+        fp++;
+    }
+
+    while(val[lp]!=val[fp]) {
+        lp--;
+    }
+    let indextoadd = lp + fp ;
+    return val.substring(indextoadd, val.length-1)+val;
+}
+
+stringoholics("bhbpp")
